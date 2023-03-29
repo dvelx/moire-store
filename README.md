@@ -1,4 +1,12 @@
-# moire
+# Educational final project - online store Moire
+## Used technologies:
+* Vue.js 3 version
+* Vuex
+* Vue-router
+* Rest API
+
+## [Link to project](https://prostog.github.io/moire-store/#/ "project used gh-pages") 
+
 
 ## Project setup
 ```

@@ -5,7 +5,7 @@
 * Vue-router
 * Rest API
 
-## [Link to project](https://prostog.github.io/moire-store/#/ "project used gh-pages") 
+## [Link to project](https://dvelx.github.io/moire-store/#/ "project used gh-pages") 
 
 
 ## Project setup

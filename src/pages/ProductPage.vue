@@ -137,10 +137,12 @@
   const { product, fetchProduct, sizeId, colorId} = useProduct()
   const isShowAddedModal = ref(false)
 
+  // метод добавления товара в корзину с выбранными параметрами и вызов модального окна об успешном/неудачном добавлении товара в корзину
   const addToCart = () => {
     store.dispatch('addProductToCart', {productId: product.value.id, amount: productAmount.value, colorId: colorId.value, sizeId: sizeId.value})
     isShowAddedModal.value = true
   }
+  //Вычисляем активное изображение товара, и если оно отсутствует, показываем заглушку
   const activeImage = computed(() => {
     const currentProduct = product.value.colors.find(item => item.color.id === colorId.value)
     if (currentProduct === undefined || currentProduct === null) {
@@ -149,6 +151,7 @@
       return currentProduct.gallery ? currentProduct.gallery[0].file.url : 'img/placeholder.png'
     }
   })
+  //загружаем нужный товар по его ID
   fetchProduct(route.params.id)
 
 

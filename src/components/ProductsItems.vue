@@ -41,6 +41,7 @@
   import numberFormat from "@/helpers/numberFormat";
   import {computed, defineAsyncComponent, h, ref} from "vue";
 
+  // Асинхронный компонент для вызова модального кона с кратким описанием определенного товара
   const ProductQuickView = defineAsyncComponent({
     loader: () => import('@/components/ProductQuickView.vue'),
     delay: 0,
@@ -51,6 +52,7 @@
   const props = defineProps({
     product: Object
   })
+  //Проверка, открыто ли модальное окно, и если да то закрываем, если нет, соответственно открываем
   const isQuickViewOpen = computed({
     get() {
       return !!currentId.value
@@ -61,6 +63,7 @@
       }
     }
   })
+  // не используется, метод для приведения стоимости товара к красивому виду ( 10000 => 10 000 )
   const priceNormalize = computed(() => {
     return props.product.map((product) => {
       return {
@@ -69,6 +72,7 @@
       }
     })
   })
+    // открытие модального окна выбранного товара по его ID
   const openQuickView = (productId) => {
     currentId.value = productId
     isQuickViewOpen.value = true

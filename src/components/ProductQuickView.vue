@@ -105,7 +105,6 @@
 </template>
 
 <script setup>
-  import {useRoute} from "vue-router";
   import {useStore} from "vuex";
   import {computed, ref} from "vue";
   import useProduct from "@/hooks/useProduct";
@@ -121,11 +120,12 @@
   const productAmount = ref(1)
   const { product, fetchProduct, colorId, sizeId} = useProduct()
   const isShowAddedModal = ref(false)
-
+// тут вызываем action из store для добавления товара в корзину
   const addToCart = () => {
     store.dispatch('addProductToCart', {productId: product.value.id, amount: productAmount.value, colorId: colorId.value, sizeId: sizeId.value})
     isShowAddedModal.value = true
   }
+  // Вычисления активного изображения товара для смены изображения по клику на цвет товара
   const activeImage = computed(() => {
     const currentProduct = product.value.colors.find(item => item.color.id === colorId.value)
     if (currentProduct === undefined) {
@@ -134,6 +134,7 @@
       return currentProduct.gallery ? currentProduct.gallery[0].file.url : 'img/placeholder.png'
     }
   })
+    // получения определенного товара по ID
   fetchProduct(props.productId)
 </script>
 

@@ -10,8 +10,9 @@
 <script setup>
   import {useStore} from "vuex";
   import {computed} from "vue";
-
+// обращение к store
   const store = useStore()
+  // вычисление количество товаров в store
   const productsAmount = computed(() => {
     return store.state.cartProductsData.length || 0
   })

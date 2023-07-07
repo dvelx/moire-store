@@ -13,6 +13,7 @@
   import {computed} from "vue";
 
   export default {
+    // Options api - тут вычисляем общую стоимость товаров
     props: ['item'],
     setup(props) {
       const prettyPrice = computed(() => {

@@ -89,6 +89,7 @@
   import {computed, ref, watch} from "vue";
   import {useRoute} from "vue-router";
 
+  //объявление роутера
   const route = useRoute()
   const props = defineProps([
     'priceFrom', 'priceTo', 'categoryId', 'colorId', 'seasons', 'material'
@@ -97,7 +98,7 @@
     'update:priceFrom', 'update:priceTo', 'update:categoryId', 'update:colorId', 'update:seasons', 'update:material'
   ])
 
-
+// реактивные переменные
   const currentPriceFrom = ref(0)
   const currentPriceTo = ref(0)
   const currentCategoryId = ref(0)
@@ -128,23 +129,27 @@
   const seasons = computed(() => {
     return seasonsData.value ? seasonsData.value.items : []
   })
-
+    // получаем список доступных категорий
   const loadCategories = () => {
     axios.get(API_BASE_URL + '/productCategories')
       .then(response => categoriesData.value = response.data);
   }
+  //получаем список доступных цветов
   const loadColors = () => {
     axios.get(API_BASE_URL + '/colors')
       .then(response => colorsData.value = response.data)
   }
+  //Получаем список доступных материалов
   const loadMaterials = () => {
     axios.get(API_BASE_URL + '/materials')
       .then(res => materialsData.value = res.data)
   }
+  //Получаем список доступных сезонов
   const loadSeasons = () => {
     axios.get(API_BASE_URL + '/seasons')
       .then(res => seasonsData.value = res.data)
   }
+  //метод submit для формы и изменения пропсов
   const submit = () => {
     emits('update:priceFrom', currentPriceFrom.value)
     emits('update:priceTo', currentPriceTo.value)
@@ -153,6 +158,7 @@
     emits('update:seasons', currentSeasons.value)
     emits('update:material', currentMaterials.value)
   }
+  // метод для сброса фильтров к изначальным значениям
   const reset = () => {
     emits('update:priceFrom', 0)
     emits('update:priceTo', 0)
@@ -167,6 +173,7 @@
     currentPriceFrom.value = 0
     currentPriceTo.value = 0
   }
+  //вызов функций получения данных с API
   loadCategories()
   loadColors()
   loadMaterials()

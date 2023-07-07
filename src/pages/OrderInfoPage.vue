@@ -116,13 +116,15 @@
 
   const store = useStore()
   const route = useRoute()
+  //Вычисляем и получаем информация о заказе
   const orderInfo = computed(() => {
     return store.state.orderInfo
   })
+  //Вычисляем и приводим общую стоимость к читабельному виду
   const totalPricePretty = computed(() => {
     return numberFormat(store.state.orderInfo.totalPrice)
   })
-
+  // вычисляем товары хранящиеся в корзине
   const orderProduct = computed(() => {
       return store.state.orderInfo.basket.items
   })

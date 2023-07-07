@@ -22,11 +22,13 @@
     'update:open'
   ])
   const content = ref(null)
+  // закрытие модалки по клику вне модального окна
   const onOutsideClick = (event) => {
     if (event.target !== content.value && event.target.contains(content.value)) {
       doClose()
     }
   }
+  // метод закрытия модального окна по клику
   const doClose = () => {
     emits('update:open', false)
   }

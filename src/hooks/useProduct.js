@@ -3,6 +3,8 @@ import axios from "axios";
 import { API_BASE_URL } from "@/config";
 import numberFormat from "@/helpers/numberFormat";
 
+//функция для получения определенного товара по его ID
+
 export default function () {
     const productData = ref(null)
     const sizeId = ref(null)

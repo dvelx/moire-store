@@ -57,21 +57,27 @@
   import {computed} from "vue";
 
   const store = useStore()
+  //Приводим общую стоимость к читабельному виду
   const priceFormat = computed(() => {
     return numberFormat(totalPrice.value)
   })
+  //вычисляем товары из корзины в store
   const products = (computed(() => {
     return store.getters['cartDetailProducts']
   }))
+  //вычисляем общую стоимость товаров в корзине из store
   const totalPrice = computed(() => {
     return store.getters['cartTotalPrice']
   })
+  // вычисляем общеее количество товаров в корзине из store
   const totalAmount = computed(() => {
     return store.getters['cartTotalAmount']
   })
+  // прелоадер до получения всех товаров в корзине
   const loadingCart = computed(() => {
     return store.state.loadingCart
   })
+    // загружаем корзину
   const loadCart = () => {
     return store.dispatch('loadCart')
   }

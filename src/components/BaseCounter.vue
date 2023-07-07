@@ -22,9 +22,11 @@
   const emits = defineEmits([
     'update:amount'
   ])
+  // функция изменения props +1
   const plus = (value) => {
     emits('update:amount', value + 1)
   }
+  // функция изменения props -1
   const minus = (value) => {
     if(props.amount <= 1) {
       value = 1

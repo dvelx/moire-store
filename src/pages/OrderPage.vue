@@ -116,6 +116,7 @@
   const products = computed(() => {
     return store.getters['cartDetailProducts']
   })
+  // Отправляем данные пользователя в API
   const order = () => {
     axios.post(API_BASE_URL + '/orders', {
       ...formData.value,
@@ -134,28 +135,33 @@
         formErrorMessage.value = error.response.data.error.message
       })
   }
+  //получение способов оплаты
   const loadPayments = (id) => {
     if (formData.value.deliveryTypeId) {
       return axios.get(API_BASE_URL + `/payments?deliveryTypeId=${id}`).then(res => payment.value = res.data || null)
     }
   }
+  //получение способов доставки
   const loadDelivery = () => {
     return axios.get(API_BASE_URL + '/deliveries').then(res => delivery.value = res.data)
   }
   loadDelivery()
+  // следим за изменением способа доставки
   watch(() => formData.value.deliveryTypeId, () => {
     loadPayments(formData.value.deliveryTypeId)
   })
+  //Вычисляем выбранный метод доставки
   const deliveryPrice = computed(() => {
     const selectedDelivery = delivery.value.find(e => e.id === formData.value.deliveryTypeId)
     return selectedDelivery ? selectedDelivery.price : 0
   })
-
+// вычисляем общую стоимость товаров и суммируем ее с стоимостью выбранного способа доставки
   const totalPriceCart = computed(() => {
     if (deliveryPrice) {
       return numberFormat(store.getters['cartTotalPrice'] + Number(deliveryPrice.value))
     }
   })
+  //Общее количество товаров в корзине
   const cartAmount = computed(() => {
     return products.value.length
   })

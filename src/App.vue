@@ -14,8 +14,10 @@
 
   const store = useStore()
 
+// получаем key из LocalStorage
   const userAccessKey = localStorage.getItem('userAccessKey')
 
+  // если в локальном хранилище есть UserKey, то сохраняем его в store
   if(userAccessKey) {
     store.commit('updateUserAccessKey', userAccessKey)
   }

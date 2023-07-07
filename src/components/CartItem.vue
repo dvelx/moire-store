@@ -51,6 +51,7 @@
   })
   const { item } = toRefs(props)
 
+  // Вычисляем Общую стоимость
   const totalItemPrice = computed(() => {
     return numberFormat(item.value.product.price * item.value.amount)
   })
@@ -62,6 +63,7 @@
       store.dispatch('updateCartProductAmount', {productId: item.value.productId, amount: value})
     }
   })
+    // метод удаления товара из корзины
   const deleteProductFromCart = (productId) => {
     return store.dispatch('deleteProductToCart', productId)
   }

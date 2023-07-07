@@ -77,7 +77,7 @@
   const countProducts = computed(() => {
     return productsData.value ? productsData.value.pagination.total : 0
   })
-
+// загружаем товары по определенным критериям, полученным из компонента ProductFilter
   const loadProducts = () => {
     productsData.value = null
     loading.value = true
@@ -103,6 +103,7 @@
           .then(() => loading.value = false)
       }, 1000)
   }
+  //следим за изменением ref переменных и коллбэком вызываем загурзку товаров с определенными параметрами
   watch([page,filterPriceFrom, filterPriceTo, filterCategory, filterColor, filterSeasons, filterMaterial, productsPerPage], () => {
     loadProducts()
   })
